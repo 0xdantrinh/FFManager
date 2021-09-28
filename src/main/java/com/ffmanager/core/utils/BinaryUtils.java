@@ -12,7 +12,7 @@ public class BinaryUtils {
     public static int[] integerToBinary(int number) {
 
         // Creating and assigning binary array size
-        int[] binary = new int[35];
+        int[] binary = new int[5];
         int id = 0;
 
         // Number should be positive

@@ -1,11 +1,15 @@
 package com.ffmanager.core.repository;
 
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.RequestBuilder;
 import org.asynchttpclient.Response;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 import static org.asynchttpclient.Dsl.*;
 
@@ -19,21 +23,13 @@ public abstract class HttpClient {
     
     protected static AsyncHttpClient ASYNC_HTTP_CLIENT = asyncHttpClient();
     
-    public RequestBuilder buildPostRequest(String url, JSONObject body) {
+    private RequestBuilder buildPostRequest(String url, JSONObject body) {
         LOGGER.debug("Executing post request to url: {} and body: {}", url, body.toString());
 
         RequestBuilder builder = post(url)
                 .addHeader("accept", "application/json")
                 .addHeader("Content-Type", "application/json")
                 .setBody(body.toString());
-
-        return builder;
-    }
-    
-    public RequestBuilder buildGetRequest(String url) {
-        LOGGER.debug("Executing get request to url: {}", url);
-
-        RequestBuilder builder = get(url);
 
         return builder;
     }
@@ -49,6 +45,20 @@ public abstract class HttpClient {
             LOGGER.error("Error executing post request to url {} with json body request {}", url, body);
             return null;
         } 
+    }
+
+    public JsonNode executeGetRequest(String url) throws IOException {
+        JsonNode jsonResponse = null;
+        try {
+            jsonResponse = Unirest.get(url)
+                    .header("Content-Type", "application/json")
+                    .asJson()
+                    .getBody();
+        } catch (Exception e) {
+            throw new IOException(e);
+        }
+        return jsonResponse;
+
     }
 
 }
