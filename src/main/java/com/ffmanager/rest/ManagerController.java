@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/")
 public class ManagerController {
 
     private final FeatureFlagServiceClient ffClient;
@@ -23,7 +22,7 @@ public class ManagerController {
         this.ffClient = ffClient;
     }
 
-    @RequestMapping(value = "feature_flags", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String messages(Model model) throws IOException {
         model.addAttribute("featureFlags", ffClient.getLatestFeatureFlags());
         return "feature_flags";

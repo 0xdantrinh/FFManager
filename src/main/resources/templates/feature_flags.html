@@ -1,8 +1,10 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th=?http://www.thymeleaf.org?>
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="ISO-8859-1">
+    <title>Homepage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -22,9 +24,8 @@
                 <th scope="col">America</th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:each="featureFlag : ${featureFlags}">
-                <input class="ffCheckbox" type="checkbox" value="${featureFlag.isKoreaEnabled()}" name="id"/>
+            <tbody th:each="featureFlag : ${featureFlags}">
+            <tr>
                 <td th:text="${featureFlag.getName()}"> </td>
                 <td th:text="${featureFlag.isAsiaEnabled()}"> </td>
                 <td th:text="${featureFlag.isKoreaEnabled()}"> </td>
@@ -32,22 +33,28 @@
                 <td th:text="${featureFlag.isJapanEnabled()}"> </td>
                 <td th:text="${featureFlag.isAmericaEnabled()}"> </td>
             </tr>
+            <form:checkbox path="receiveNewsletter" />
+            <tr>
+                <td></td>
+                <td><input class="ffCheckbox" type="checkbox" name="id"/></td>
+                <td><input class="ffCheckbox" type="checkbox" name="id"/></td>
+                <td><input class="ffCheckbox" type="checkbox" name="id"/></td>
+                <td><input class="ffCheckbox" type="checkbox" name="id"/></td>
+                <td><input class="ffCheckbox" type="checkbox" name="id"/></td>
+            </tr>
             </tbody>
         </table>
     </div>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <a href="#" class="btn btn-primary">Save</a>
 </div>
-
 </body>
 <script>
     console.log("swag")
     jQuery.each( $("input[type='checkbox']"), function( i, val ) {
-        if (val.val() == 1) {
-            val.prop('checked', true);
-
-        } else {
-            val.prop('checked', false);
+        if (val.value == 1) {
+            val.checked = true
         }
     });
 </script>
 </html>
+
