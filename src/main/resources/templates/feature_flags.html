@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="card">
+    <div class="card-header bg-info">
+        Feature Flag Manager
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Region</th>
+                <th scope="col">Asia</th>
+                <th scope="col">Korea</th>
+                <th scope="col">Europe</th>
+                <th scope="col">Japan</th>
+                <th scope="col">America</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="featureFlag : ${featureFlags}">
+                <input class="ffCheckbox" type="checkbox" value="${featureFlag.isKoreaEnabled()}" name="id"/>
+                <td th:text="${featureFlag.getName()}"> </td>
+                <td th:text="${featureFlag.isAsiaEnabled()}"> </td>
+                <td th:text="${featureFlag.isKoreaEnabled()}"> </td>
+                <td th:text="${featureFlag.isEuropeEnabled()}"> </td>
+                <td th:text="${featureFlag.isJapanEnabled()}"> </td>
+                <td th:text="${featureFlag.isAmericaEnabled()}"> </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+</div>
+
+</body>
+<script>
+    console.log("swag")
+    jQuery.each( $("input[type='checkbox']"), function( i, val ) {
+        if (val.val() == 1) {
+            val.prop('checked', true);
+
+        } else {
+            val.prop('checked', false);
+        }
+    });
+</script>
+</html>
