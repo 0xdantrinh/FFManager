@@ -33,14 +33,19 @@
                 <td th:text="${featureFlag.isJapanEnabled()}"> </td>
                 <td th:text="${featureFlag.isAmericaEnabled()}"> </td>
             </tr>
-            <form:checkbox path="receiveNewsletter" />
             <tr>
-                <td></td>
-                <td><input class="ffCheckbox" type="checkbox" name="id"/></td>
-                <td><input class="ffCheckbox" type="checkbox" name="id"/></td>
-                <td><input class="ffCheckbox" type="checkbox" name="id"/></td>
-                <td><input class="ffCheckbox" type="checkbox" name="id"/></td>
-                <td><input class="ffCheckbox" type="checkbox" name="id"/></td>
+                <form th:action="@{/featureFlags/save}" th:object="${FeatureFlag}" method="post">
+                    <p>
+                        <label>Regions:
+                            <td></td>
+                            <td><input type="checkbox" th:name="${featureFlag.getName()} + '_' + 'isAsiaEnabled'" value=1></td>
+                            <td><input type="checkbox" th:name="${featureFlag.getName()} + '_' + 'isAsiaEnabled'" value=1></td>
+                            <td><input type="checkbox" th:name="${featureFlag.getName()} + '_' + 'isAsiaEnabled'" value=1></td>
+                            <td><input type="checkbox" th:name="${featureFlag.getName()} + '_' + 'isAsiaEnabled'" value=1></td>
+                            <td><input type="checkbox" th:name="${featureFlag.getName()} + '_' + 'isAsiaEnabled'" value=1></td>
+                        </label>
+                    </p>
+                </form>
             </tr>
             </tbody>
         </table>
